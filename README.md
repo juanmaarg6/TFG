@@ -2,7 +2,6 @@
 
 ## Resumen
 
-<div style="text-align: justify;">
 **PALABRAS CLAVE:** Modelización Matemática, Invarianza a Traslaciones, Invarianza frente a Deformaciones, Redes de Dispersión, Teoría de Marcos, Transformada de Ondículas, Ondículas, Aprendizaje Automático, Visión por Computador, Aprendizaje Profundo, Redes Neuronales Convolucionales, Extracción de Características, Segmentación de Instancias, Mask R-CNN, IA Explicable, Grad-CAM.
 
 Por un lado, el propósito matemático principal del trabajo detallado a continuación es desarrollar en detalle una modelización matemática general de las redes neuronales convolucionales, de manera que se adapte muchas de las arquitecturas más comúnmente utilizadas para este tipo de redes. Además, utilizando esta modelización general, se demostrará una de las propiedades principales de las redes neuronales convolucionales enfocadas en la extracción de características, la invarianza vertical a traslaciones.
@@ -16,11 +15,9 @@ La parte matemática de este trabajo se basa en el artículo *A Mathematical The
 Por otro lado, la parte informática de este trabajo se centra en la segmentación de instancias, un proceso clave para detectar objetos en una escena y generar máscaras que permitan extraer con precisión dichos objetos. Este proceso implica dos etapas: primero, la detección de la región rectangular que contiene el objeto y, posteriormente, la generación de una máscara que segmenta el objeto detectado, definiendo con precisión sus contornos. En este contexto, la arquitectura Mask R-CNN ha demostrado ser particularmente efectiva para esta tarea, proporcionando resultados prometedores en la segmentación de instancias. Sin embargo, como muchas redes neuronales profundas, Mask R-CNN presenta limitaciones en términos de interpretabilidad, es decir, la dificultad para comprender las razones detrás de sus decisiones.
 
 Con el objetivo de mejorar la interpretabilidad de Mask R-CNN, este trabajo propone la aplicación de Grad-CAM, un método de interpretabilidad post-hoc que permite visualizar las regiones de una imagen que influyen más en las decisiones de la red. La implementación de Grad-CAM sobre Mask R-CNN, basada en adaptaciones propuestas en investigaciones previas, busca facilitar la comprensión de los procesos de inferencia de esta arquitectura neuronal. De este modo, en este trabajo se pretende dotar de explicabilidad a un modelo que de otro modo sería una caja negra.
-</div>
 
 ## Abstract
 
-<div style="text-align: justify;">
 **KEYWORDS:** Mathematical Modeling, Translation Invariance, Deformation Invariance, Scattering Networks, Frame Theory, Wavelet Transform, Wavelets, Machine Learning, Computer Vision, Deep Learning, Convolutional Neural Networks, Feature Extraction, Instance Segmentation, Mask R-CNN, Explainable AI, Grad-CAM.
 
 On one hand, the main mathematical purpose of the work detailed below is to develop a comprehensive mathematical modeling of convolutional neural networks, adapting to many of the most commonly used architectures for this type of network. Additionally, using this general modeling, one of the main properties of convolutional neural networks focused on feature extraction, namely translation invariance, will be demonstrated.
@@ -34,4 +31,3 @@ The mathematical part of this work builds on the article *A Mathematical Theory 
 On the other hand, the computational part of this work focuses on instance segmentation, a key process for detecting objects in a scene and generating masks that precisely extract these objects. This process involves two stages: first, detecting the rectangular region containing the object, and then generating a mask that segments the detected object, accurately defining its contours. In this context, the Mask R-CNN architecture has proven to be particularly effective for this task, providing promising results in instance segmentation. However, like many deep neural networks, Mask R-CNN faces challenges in terms of interpretability, meaning the difficulty in understanding the reasoning behind its decisions.
 
 To improve the interpretability of Mask R-CNN, this work proposes the application of Grad-CAM, a post-hoc interpretability method that allows for visualizing the regions of an image that most influence the network’s decisions. The implementation of Grad-CAM on Mask R-CNN, based on adaptations proposed in previous research, aims to enhance the understanding of the inference processes of this neural architecture. Thus, this work intends to provide explainability to a model that would otherwise be a black box.
-</div>
