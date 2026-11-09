@@ -1,6 +1,6 @@
 # Mathematical Analysis of Convolutional Neural Networks and Explainable Instance Segmentation
 
-**Bachelor's Thesis · Joint Bachelor's Degree in Computer Science and Engineering and Mathematics · University of Granada · June 2025**  
+**Bachelor's Thesis · Joint Bachelor's Degree in Computer Science and Mathematics · University of Granada · June 2025**  
 **Final grade: 9.54/10 in both degrees**
 
 [**Thesis (PDF)**](docs/bachelors_thesis.pdf) · [**Presentation (PDF)**](docs/thesis_presentation.pdf) · [**Implementation notebook**](dentcam_rcnn.ipynb) · [**Citation**](CITATION.cff)
