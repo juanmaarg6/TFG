@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this research code or its results, please cite the associated Bachelor's Thesis."
+authors:
+  - family-names: "Rodríguez Gómez"
+    given-names: "Juan Manuel"
+title: "DentCAM-RCNN: Mathematical Analysis of Convolutional Neural Networks and Explainable Instance Segmentation"
+abstract: >-
+  Repository accompanying a joint Bachelor's Thesis in Computer Science and
+  Engineering and Mathematics, combining a mathematical analysis of
+  convolutional neural networks with Mask R-CNN instance segmentation of
+  dental radiographs and Grad-CAM explainability.
+repository-code: "https://github.com/juanmaarg6/TFG"
+url: "https://github.com/juanmaarg6/TFG"
+preferred-citation:
+  type: thesis
+  authors:
+    - family-names: "Rodríguez Gómez"
+      given-names: "Juan Manuel"
+  title: "Mathematical Analysis of Convolutional Neural Networks and Explainability Techniques for Deep Neural Architectures in Instance Segmentation"
+  year: 2025
+  institution:
+    name: "University of Granada"
+  url: "https://github.com/juanmaarg6/TFG/blob/main/docs/bachelors_thesis.pdf"
