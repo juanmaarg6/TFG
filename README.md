@@ -1,152 +1,144 @@
-# Bachelor's Thesis: Mathematical Analysis of Convolutional Neural Networks and Explainable Instance Segmentation
+# Mathematical Analysis of Convolutional Neural Networks and Explainable Instance Segmentation
 
-**DentCAM-RCNN — Mathematical foundations, dental instance segmentation, and explainable AI**
+**Bachelor's Thesis · Joint Bachelor's Degree in Computer Science and Engineering and Mathematics · University of Granada · June 2025**  
+**Final grade: 9.54/10 in both degrees**
 
-Joint Bachelor's Thesis in **Computer Science and Engineering** and **Mathematics**, University of Granada (June 2025).  
-**Final grade:** 9.54/10 in both degrees.
+[**Thesis (PDF)**](docs/bachelors_thesis.pdf) · [**Presentation (PDF)**](docs/thesis_presentation.pdf) · [**Implementation notebook**](dentcam_rcnn.ipynb) · [**Citation**](CITATION.cff)
 
-**Thesis materials:** [Full thesis](docs/bachelors_thesis.pdf) · [Defense presentation](docs/thesis_presentation.pdf)  
-**Implementation:** [DentCAM-RCNN notebook](dentcam_rcnn.ipynb) · [Mask R-CNN source](mrcnn/) · [Dependencies](requirements.txt)
-
-## Overview
-
-This thesis brings together two complementary perspectives on deep convolutional neural networks:
-
-1. **Mathematical analysis:** a general framework for understanding the properties of deep convolutional feature extractors, based on semi-discrete frames, Lipschitz-continuous nonlinearities, and pooling operators.
-2. **Computer vision and explainability:** an adaptation of Mask R-CNN for instance-level segmentation of teeth in panoramic dental radiographs, extended with Grad-CAM visualizations to interpret individual predictions. This implementation is named **DentCAM-RCNN**.
-
-The goal is to connect theoretical understanding of convolutional representations with a practical, experimentally evaluated image-analysis application.
+> **How can mathematical understanding of convolutional networks complement accurate and explainable instance segmentation?**
+>
+> This joint thesis combines a **theoretical analysis of deep convolutional feature extractors** with **DentCAM-RCNN**, a Mask R-CNN adaptation for individual tooth segmentation in panoramic dental radiographs. The practical component incorporates Grad-CAM to analyze instance-level predictions and evaluates detection, segmentation, and explanation quality.
 
 **Keywords:** Convolutional Neural Networks, Mathematical Modeling, Wavelets, Computer Vision, Deep Learning, Instance Segmentation, Explainable Artificial Intelligence, Grad-CAM.
 
+## At a glance
+
+- **Academic scope:** one joint thesis spanning Computer Science and Engineering and Mathematics.
+- **Mathematical foundations:** Mallat's scattering-network analysis and the general framework of Wiatowski and Bölcskei, including semi-discrete frames, Lipschitz-continuous nonlinearities, and pooling operators.
+- **Application:** instance segmentation of teeth in panoramic dental radiographs.
+- **Model:** COCO-pretrained Mask R-CNN with a ResNet-101 backbone and Feature Pyramid Network (FPN), fine-tuned for the dental domain.
+- **Explainability:** instance-level Grad-CAM adapted to the `roi_align_classifier` representation.
+- **Evaluation:** detection (precision, recall, F1-score, AP@50), segmentation (DSC, IoU, Hausdorff distance), and explanation quality (deletion, insertion, stability, and Grad-CAM overlap).
+
 ## Key results
 
-DentCAM-RCNN was evaluated on the thesis test set using detection, segmentation, and explainability metrics. The principal reported results are:
+The DentCAM-RCNN implementation achieved the following results on the thesis test set:
 
-| Metric | Test-set result |
-| --- | ---: |
-| F1-score (detection) | **96.04%** |
-| Precision (detection) | **97.36%** |
-| Dice similarity coefficient (DSC) | **87.76%** |
-| Intersection over Union (IoU) | **79.23%** |
+| Evaluation area | Metric | Test-set result |
+| --- | --- | ---: |
+| Detection | F1-score | **96.04%** |
+| Detection | Precision | **97.36%** |
+| Segmentation | Dice similarity coefficient (DSC) | **87.76%** |
+| Segmentation | Intersection over Union (IoU) | **79.23%** |
 
-The thesis also evaluates AP@50, recall, Hausdorff distance, and explanation metrics (deletion, insertion, stability, and Grad-CAM overlap), broken down by dental category. Comparisons with the original baseline and classical unsupervised segmentation methods are reported in the [full thesis](docs/bachelors_thesis.pdf).
+The study also reports category-wise detection, segmentation, and explainability metrics, as well as comparisons against the original baseline model and classical unsupervised segmentation methods. See the [full thesis](docs/bachelors_thesis.pdf) for the complete experimental results and comparison protocol.
 
-**Scope:** These figures are results of the study's specific dataset and evaluation protocol; they do not establish clinical performance or generalization to external hospitals or imaging systems.
+**Interpretation:** the reported results support the effectiveness of the domain-adapted model **on the dataset and evaluation protocol used in this thesis**. They do not establish clinical suitability or generalization to unseen hospitals, imaging devices, or patient populations.
 
-## Part I — Mathematical analysis of CNNs
+### Qualitative visualizations
 
-The mathematical component builds on Mallat's analysis of scattering networks and the broader framework developed by Wiatowski and Bölcskei. Deep convolutional feature extractors are studied through:
+The following examples compare segmentation predictions and Grad-CAM explanations from the baseline and DentCAM-RCNN.
 
-- General semi-discrete frames and convolutional filtering.
-- Lipschitz-continuous activation functions and pooling operators.
-- Mathematical properties of feature representations under spatial transformations.
-- Translation-related invariance properties of deep feature extractors under the assumptions of the framework.
+| Dental categories 1–4 | Dental categories 7–10 |
+| --- | --- |
+| ![Segmentation and Grad-CAM comparisons for dental categories 1–4](img/fig_3.png) | ![Segmentation and Grad-CAM comparisons for dental categories 7–10](img/fig_4.png) |
 
-This component provides a theoretical perspective on how deep convolutional architectures can produce increasingly robust feature representations. The exact assumptions, definitions, and proofs are given in the [thesis](docs/bachelors_thesis.pdf).
+## Methodology
 
-## Part II — DentCAM-RCNN
+### Part I — Mathematical analysis of CNNs
 
-### Instance segmentation
+The theoretical component extends the analysis of scattering networks introduced by Mallat through the framework developed by Wiatowski and Bölcskei. It studies deep convolutional feature extractors built from:
 
-DentCAM-RCNN adapts **Mask R-CNN** to the instance segmentation of teeth in panoramic dental radiographs. The implementation uses a **ResNet-101 backbone with a Feature Pyramid Network (FPN)**, a Region Proposal Network (RPN), RoI alignment, and task-specific branches for classification, bounding-box regression, and mask prediction.
+- **General semi-discrete frames** and associated convolutional filters.
+- **Lipschitz-continuous activation functions** and pooling operators.
+- **Feature representations under spatial translations**, including the vertical translation-invariance properties derived under the framework's assumptions.
 
-A COCO-pretrained model is fine-tuned for the dental domain. The work evaluates both detection and segmentation quality, with results reported by dental category.
+This analysis provides a mathematical perspective on why feature representations may become increasingly robust to spatial displacements with network depth. The precise hypotheses, definitions, and proofs are documented in the [thesis](docs/bachelors_thesis.pdf).
 
-![Mask R-CNN architecture used in the study](img/fig_1.png)
+### Part II — DentCAM-RCNN
 
-### Explainability with Grad-CAM
+**Instance segmentation.** DentCAM-RCNN adapts a COCO-pretrained **Mask R-CNN** to panoramic dental radiographs. The architecture uses a **ResNet-101 + FPN** feature extractor, a Region Proposal Network (RPN), RoI alignment, and separate branches for classification, bounding-box regression, and instance masks. The model is fine-tuned for the dental domain.
 
-A Grad-CAM adaptation is applied to instance-level predictions to produce heatmaps highlighting image regions that influence the corresponding classification output. The implementation analyzes the `roi_align_classifier` feature representation and uses per-instance class scores for explanation.
+![Mask R-CNN architecture used in the thesis](img/fig_1.png)
 
-The explainability analysis includes both qualitative examples and quantitative measurements, rather than relying exclusively on visual inspection.
+**Explainability.** Following the instance-level adaptations discussed by **Inbaraj et al.**, the implementation applies **Grad-CAM** to individual predictions, using features associated with `roi_align_classifier` and per-instance class scores to produce attribution heatmaps. The explanations are examined visually and evaluated quantitatively using deletion, insertion, stability, and overlap-based measurements.
 
 ![Grad-CAM explanation workflow](img/fig_2.png)
 
-### Qualitative results
-
-The figures below compare segmentation outputs and explanation maps from the baseline and DentCAM-RCNN on selected examples.
-
-**Dental categories 1–4**
-
-![DentCAM-RCNN qualitative comparison, categories 1–4](img/fig_3.png)
-
-**Dental categories 7–10**
-
-![DentCAM-RCNN qualitative comparison, categories 7–10](img/fig_4.png)
+**Evaluation.** The experimental study analyzes detection, instance segmentation, and explanation quality across dental categories, comparing the adapted approach with the baseline and classical unsupervised methods. The reported metrics and experimental design are documented in the [full thesis](docs/bachelors_thesis.pdf).
 
 ## Repository structure
 
 ```text
-TFG/
-├── dataset/                     # Data assets from the original implementation; check access and reuse rights
-├── docs/
-│   ├── bachelors_thesis.pdf     # Joint Bachelor's Thesis
-│   └── thesis_presentation.pdf  # Defense slides
-├── img/                         # Architecture, explainability, and result figures
-├── mrcnn/                       # Adapted Mask R-CNN implementation; third-party license applies
-├── dentcam_rcnn.ipynb           # Main experiment and analysis notebook
-├── requirements.txt             # Dependencies used by the original codebase
-├── README.md                    # Project overview and documentation
-├── CITATION.cff                 # Machine-readable citation metadata
-├── LICENSE                      # CC0-1.0 for eligible original contributions
-└── LICENSE_MATTERPORT.txt       # Matterport MIT copyright and license notice
+.
+├── docs/                         # Thesis documents
+│   ├── bachelors_thesis.pdf      # Joint Bachelor's Thesis
+│   └── thesis_presentation.pdf   # Defense slides
+├── img/                          # Architecture, explanation, and result figures
+├── mrcnn/                        # Adapted Mask R-CNN implementation (MIT-origin code)
+├── dentcam_rcnn.ipynb            # Main implementation and experimental notebook
+├── requirements.txt              # Recorded Python dependencies
+├── README.md                     # Project overview and documentation
+├── CITATION.cff                  # Machine-readable citation metadata
+├── LICENSE                       # CC0-1.0 for eligible original contributions
+└── LICENSE_MATTERPORT.txt        # Matterport MIT copyright and license notice
 ```
 
-## Installation and use
+The notebook, model implementation, figures, and thesis documents are consolidated in this repository. The original research code is preserved rather than repackaged as a maintained software library. A local `dataset/` directory may be required by the notebook; **the public availability of medical-image data should not be assumed**.
 
-### 1. Clone the unified repository
+## Setup and reproducibility
+
+### Environment
+
+The repository's recorded dependencies include:
+
+| Component | Recorded version |
+| --- | --- |
+| TensorFlow | 2.14.0 (`tensorflow[and-cuda]`) |
+| Keras | 2.14.0 |
+| NumPy | 1.23.5 |
+| OpenCV | 4.8.0.76 |
+| scikit-image | 0.19.3 |
+
+Clone the repository and prepare an appropriately compatible Python environment:
 
 ```bash
 git clone https://github.com/juanmaarg6/TFG.git
 cd TFG
-```
 
-### 2. Prepare a compatible Python environment
-
-Create and activate a virtual environment, then install the project's recorded dependencies:
-
-```bash
 python -m venv .venv
-# Activate the environment using the command appropriate for your operating system.
+# Activate .venv using the command for your operating system.
 pip install -r requirements.txt
 ```
 
-The historical dependencies include TensorFlow 2.14, Keras 2.14, and the Matterport-derived Mask R-CNN implementation. GPU setup, Python-version compatibility, and platform-specific adjustments may be required. The environment has **not** been independently revalidated on a current system; installing the requirements alone does not guarantee reproducibility.
+**Compatibility note:** the pinned packages reflect the original research environment. A compatible Python version, operating system, CUDA setup, and additional configuration may be needed. This environment has **not been independently revalidated on a current system**, so the installation commands are not a guarantee of end-to-end reproducibility.
 
-### 3. Review the dataset and notebook configuration
+### Dataset, weights, and configuration
 
-The notebook and training scripts may expect local paths, pretrained weights, and a specific dental-image dataset structure. Adjust these paths before running any cells. **Do not assume that medical images can be redistributed**: confirm permissions, licensing, and appropriate anonymization before publishing or reusing data.
+The notebook may depend on a locally available dental radiograph dataset, pretrained model weights, and machine-specific paths. Before execution:
 
-### 4. Run the notebook
+- Obtain and organize the required dataset **only with the appropriate permissions**.
+- Review the notebook's dataset paths and expected directory structure.
+- Provide the required pretrained weights and adjust any local configuration.
+- Check the compatibility of the TensorFlow/Keras environment and available GPU resources.
 
-Open [`dentcam_rcnn.ipynb`](dentcam_rcnn.ipynb) in Jupyter Notebook, JupyterLab, or a compatible environment. The notebook contains the workflow for model adaptation, prediction, segmentation assessment, and Grad-CAM visualization.
+Medical images, model weights, and other third-party assets are **not automatically licensed for redistribution** by this repository. Ensure that any data used or shared are appropriately authorized and de-identified.
 
-The original implementation is preserved as research code; it has not been packaged as a maintained library or validated as a clinical application.
+### Running the notebook
 
-## Thesis documents
+Open [`dentcam_rcnn.ipynb`](dentcam_rcnn.ipynb) in Jupyter Notebook, JupyterLab, or another compatible notebook environment. It contains the research workflow for model adaptation, segmentation, evaluation, and Grad-CAM visualization.
 
-- [Full Bachelor's Thesis (PDF)](docs/bachelors_thesis.pdf)
-- [Defense presentation (PDF)](docs/thesis_presentation.pdf)
+The original implementation has not been independently reproduced or validated as a clinical application. For the full experimental protocol, consult the [thesis](docs/bachelors_thesis.pdf).
 
-The PDFs are linked using English filenames for a consistent repository structure. Their contents retain the language and academic form of the original submitted documents.
-
-## Authorship and acknowledgments
+## Author and acknowledgements
 
 **Juan Manuel Rodríguez Gómez**  
-Joint Bachelor's Degree in Computer Science and Engineering and Mathematics  
-University of Granada, 2025
+Joint Bachelor's Degree in Computer Science and Engineering and Mathematics · University of Granada · 2025
 
-DentCAM-RCNN builds upon the open-source Mask R-CNN implementation by **Matterport, Inc.** and the Grad-CAM explainability methodology. The respective original contributions remain attributed to their creators.
+This work draws on the mathematical contributions of **Stéphane Mallat** and **Wiatowski and Bölcskei**, the **Mask R-CNN implementation by Matterport, Inc.**, and the Grad-CAM methodology, including the instance-level adaptations discussed by Inbaraj et al. Third-party contributions remain attributed to their respective creators.
 
-## License and third-party materials
+## Citation and license
 
-**CC0-1.0** applies to the original materials in this repository **only where the author has the rights to make that dedication**. See [`LICENSE`](LICENSE).
+If you use or reference this work, please cite the Bachelor's Thesis. Machine-readable citation metadata is available in [`CITATION.cff`](CITATION.cff).
 
-The adapted Mask R-CNN source under [`mrcnn/`](mrcnn/) includes code originating from **Matterport, Inc.**, which is distributed under the **MIT License**. Its existing copyright notices and license requirements must be retained. The original notice is provided in [`LICENSE_MATTERPORT.txt`](LICENSE_MATTERPORT.txt). Applying CC0 to the author's own work **does not change the license of third-party code**.
-
-Datasets, images, pretrained weights, and other third-party assets may have independent permissions and usage restrictions; they are **not automatically covered by CC0**. Confirm authorization before sharing medical-image data.
-
-## Citation
-
-If this project is useful for your research, please cite the Bachelor's Thesis or the associated repository. Machine-readable metadata is provided in [`CITATION.cff`](CITATION.cff); GitHub can use it to generate citation formats.
+This repository includes a [`CC0-1.0 license`](LICENSE) for **original contributions where the author has the rights to make that dedication**. The adapted code derived from **Matterport's Mask R-CNN** remains subject to the **MIT License** and its attribution requirements; see [`LICENSE_MATTERPORT.txt`](LICENSE_MATTERPORT.txt). Third-party datasets, imagery, weights, and dependencies may have separate restrictions and are **not covered automatically by CC0**.
