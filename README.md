@@ -13,7 +13,7 @@
 
 ## At a glance
 
-- **Academic scope:** one joint thesis spanning Computer Science and Engineering and Mathematics.
+- **Academic scope:** one joint thesis spanning Computer Science and Mathematics.
 - **Mathematical foundations:** Mallat's scattering-network analysis and the general framework of Wiatowski and Bölcskei, including semi-discrete frames, Lipschitz-continuous nonlinearities, and pooling operators.
 - **Application:** instance segmentation of teeth in panoramic dental radiographs.
 - **Model:** COCO-pretrained Mask R-CNN with a ResNet-101 backbone and Feature Pyramid Network (FPN), fine-tuned for the dental domain.
@@ -133,7 +133,7 @@ The original implementation has not been independently reproduced or validated a
 ## Author and acknowledgements
 
 **Juan Manuel Rodríguez Gómez**  
-Joint Bachelor's Degree in Computer Science and Engineering and Mathematics · University of Granada · 2025
+Joint Bachelor's Degree in Computer Science and Mathematics · University of Granada · 2025
 
 This work draws on the mathematical contributions of **Stéphane Mallat** and **Wiatowski and Bölcskei**, the **Mask R-CNN implementation by Matterport, Inc.**, and the Grad-CAM methodology, including the instance-level adaptations discussed by Inbaraj et al. Third-party contributions remain attributed to their respective creators.
 
